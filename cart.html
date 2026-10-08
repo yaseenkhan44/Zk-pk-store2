@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart - ZK.PK Premium Watches</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .cart-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+    .cart-table th, .cart-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .cart-summary {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      max-width: 400px;
+      margin-left: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">ZK<span>.PK</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Watches</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="btn-cart active">Cart <span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 3rem 1rem;">
+    <h1 class="font-luxury" style="font-size: 2rem; margin-bottom: 1rem;">Your Watch Cart</h1>
+
+    <div id="cartContent">
+      <!-- Injected via JavaScript -->
+    </div>
+  </main>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+  <script>
+    function renderCartPage() {
+      const cart = getCart();
+      const container = document.getElementById('cartContent');
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; padding: 4rem 1rem;">
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1rem;">Your cart is empty.</p>
+            <a href="products.html" class="btn-primary">Browse 40 Watches</a>
+          </div>
+        `;
+        return;
+      }
+
+      const subtotal = cart.reduce((acc, i) => acc + i.product.price * i.quantity, 0);
+      const shipping = subtotal > 1999 ? 0 : 150;
+      const total = subtotal + shipping;
+
+      let rows = cart.map(item => `
+        <tr>
+          <td><img src="${item.product.image}" style="width: 50px; height: 50px; border-radius: 8px; object-fit: cover;"></td>
+          <td><strong>${item.product.name}</strong><br><small style="color: var(--text-secondary);">${item.product.brand}</small></td>
+          <td>Rs. ${item.product.price.toLocaleString()}</td>
+          <td>${item.quantity}</td>
+          <td><strong>Rs. ${(item.product.price * item.quantity).toLocaleString()}</strong></td>
+        </tr>
+      `).join('');
+
+      container.innerHTML = `
+        <table class="cart-table">
+          <thead>
+            <tr><th>Image</th><th>Watch</th><th>Price</th><th>Qty</th><th>Total</th></tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+
+        <div class="cart-summary">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+            <span>Subtotal:</span>
+            <span>Rs. ${subtotal.toLocaleString()}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+            <span>Delivery:</span>
+            <span style="color: ${shipping === 0 ? 'var(--emerald)' : 'inherit'};">${shipping === 0 ? 'FREE' : 'Rs. ' + shipping}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 1.15rem; border-top: 1px solid var(--border); padding-top: 10px; margin-bottom: 1.5rem;">
+            <span>Total:</span>
+            <span style="color: var(--gold);">Rs. ${total.toLocaleString()}</span>
+          </div>
+          <a href="checkout.html" class="btn-primary" style="width: 100%; justify-content: center;">Proceed to Checkout</a>
+        </div>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', renderCartPage);
+  </script>
+</body>
+</html>

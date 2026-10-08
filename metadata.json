@@ -1,0 +1,7 @@
+{
+  "name": "ZK.PK - Premium Watches Pakistan",
+  "description": "ZK.PK is Pakistan's premier online store for luxury, chronograph, automatic, and classic wristwatches. Nationwide Cash on Delivery with open parcel check.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

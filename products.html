@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Watches (40 Models) - ZK.PK Premium Watches Pakistan</title>
+  <meta name="description" content="Browse all 40 luxury, chronograph, automatic and classic watches at ZK.PK. Prices starting from Rs. 999 with Cash on Delivery nationwide.">
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Announcement -->
+  <div class="announcement-bar">
+    <div><span class="highlight">OPEN PARCEL INSPECTION</span> · Verify watch with rider before paying cash</div>
+    <div>WhatsApp: <a href="https://wa.me/923111089742">+92 311 1089742</a> · Free Delivery over Rs. 1,999</div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">ZK<span>.PK</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Watches</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="btn-cart">Cart <span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container products-section">
+    <div class="section-head">
+      <div>
+        <h1 class="font-luxury" style="font-size: 2.2rem;">All 40 Watch Models</h1>
+        <p style="color: var(--text-secondary); font-size: 0.85rem;">Strictly 100% watches only. Sourced and tested for Pakistani wrist connoisseurs.</p>
+      </div>
+
+      <!-- Price Tier Filter -->
+      <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+        <select id="priceFilter" onchange="filterProducts()" style="background: var(--bg-surface); color: #fff; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px;">
+          <option value="all">All Prices (40 Watches)</option>
+          <option value="999">Rs. 999 (10 Watches)</option>
+          <option value="1499">Rs. 1,499 (5 Watches)</option>
+          <option value="1799">Rs. 1,799 (5 Watches)</option>
+          <option value="1999">Rs. 1,999 (10 Watches)</option>
+          <option value="2499">Rs. 2,499 (5 Watches)</option>
+          <option value="3499">Rs. 3,499 (5 Watches)</option>
+        </select>
+
+        <select id="categoryFilter" onchange="filterProducts()" style="background: var(--bg-surface); color: #fff; border: 1px solid var(--border); padding: 8px 12px; border-radius: 8px;">
+          <option value="all">All Categories</option>
+          <option value="Men's Watches">Men's Watches</option>
+          <option value="Luxury Watches">Luxury Watches</option>
+          <option value="Chronograph Watches">Chronograph Watches</option>
+          <option value="Automatic Watches">Automatic Watches</option>
+          <option value="Classic Watches">Classic Watches</option>
+          <option value="Casual Watches">Casual Watches</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Dynamic Product Grid -->
+    <div id="productGrid" class="product-grid"></div>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5 class="logo">ZK<span>.PK</span></h5>
+        <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 10px 0;">Pakistan's dedicated watch boutique. Genuine watches only.</p>
+        <p style="color: var(--text-secondary); font-size: 0.8rem;">WhatsApp: +92 311 1089742<br>Email: yaseenali22235@gmail.com</p>
+      </div>
+      <div class="footer-col">
+        <h5>Customer Care</h5>
+        <ul>
+          <li><a href="shipping-policy.html">Shipping Policy</a></li>
+          <li><a href="return-policy.html">Return & Refund</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="privacy-policy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 ZK.PK Watches. All rights reserved.</div>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+  <script>
+    function renderProducts(list) {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      list.forEach(p => {
+        const discount = Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100);
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+          <div class="product-thumb">
+            <img src="${p.image}" alt="${p.name}" loading="lazy">
+            ${discount > 0 ? `<span class="badge-discount">SAVE ${discount}%</span>` : ''}
+          </div>
+          <div class="product-body">
+            <div>
+              <div class="product-meta">${p.brand} · ${p.category}</div>
+              <h3 class="product-title">${p.name}</h3>
+              <div class="product-price-row">
+                <span class="price-current">Rs. ${p.price.toLocaleString()}</span>
+                <span class="price-original">Rs. ${p.originalPrice.toLocaleString()}</span>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn-card" onclick="addToCart('${p.id}')">Add to Cart</button>
+              <a href="product.html?id=${p.id}" class="btn-card btn-card-buy">Details</a>
+              <a href="${getWhatsAppSingleUrl(p)}" target="_blank" class="btn-card-wa">Order on WhatsApp</a>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterProducts() {
+      const priceVal = document.getElementById('priceFilter').value;
+      const catVal = document.getElementById('categoryFilter').value;
+
+      let list = WATCH_PRODUCTS;
+      if (priceVal !== 'all') {
+        list = list.filter(p => p.price === Number(priceVal));
+      }
+      if (catVal !== 'all') {
+        list = list.filter(p => p.category === catVal);
+      }
+      renderProducts(list);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderProducts(WATCH_PRODUCTS);
+    });
+  </script>
+</body>
+</html>

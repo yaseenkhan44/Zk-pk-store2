@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Details - ZK.PK Premium Watches</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .product-detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin: 3rem 0;
+      align-items: start;
+    }
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+    }
+    .specs-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .specs-table td:first-child {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      .product-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="announcement-bar">
+    <div><span class="highlight">OPEN PARCEL INSPECTION</span> · Verify watch with courier before paying</div>
+    <div>WhatsApp: +92 311 1089742 · Free Delivery over Rs. 1,999</div>
+  </div>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">ZK<span>.PK</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Watches</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="btn-cart">Cart <span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="productDetail" class="product-detail-grid">
+      <!-- Injected via JavaScript -->
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h5 class="logo">ZK<span>.PK</span></h5>
+        <p style="color: var(--text-secondary); font-size: 0.8rem; margin: 10px 0;">Pakistan's dedicated watch boutique.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="products.html">All Watches</a></li>
+          <li><a href="shipping-policy.html">Shipping Policy</a></li>
+          <li><a href="return-policy.html">Return & Refund</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 ZK.PK Watches. All rights reserved.</div>
+  </footer>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id') || 'zk-01';
+      const product = WATCH_PRODUCTS.find(p => p.id === id) || WATCH_PRODUCTS[0];
+
+      document.title = `${product.name} - ZK.PK Watches Pakistan`;
+
+      const container = document.getElementById('productDetail');
+      container.innerHTML = `
+        <div style="background: #000; border-radius: 16px; overflow: hidden; border: 1px solid var(--border);">
+          <img src="${product.image}" alt="${product.name}" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;">
+        </div>
+        <div>
+          <div style="color: var(--gold); font-size: 0.8rem; text-transform: uppercase; font-weight: 700;">${product.brand} · ${product.category}</div>
+          <h1 class="font-luxury" style="font-size: 2rem; margin: 8px 0;">${product.name}</h1>
+          <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 1rem;">
+            <span style="font-size: 2rem; font-weight: 900; color: var(--gold);">Rs. ${product.price.toLocaleString()}</span>
+            <span style="font-size: 1rem; color: var(--text-secondary); text-decoration: line-through;">Rs. ${product.originalPrice.toLocaleString()}</span>
+          </div>
+
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem;">${product.fullDescription}</p>
+
+          <div style="display: flex; gap: 10px; margin-bottom: 1.5rem;">
+            <button onclick="addToCart('${product.id}')" class="btn-primary" style="flex: 1; justify-content: center;">Add to Cart</button>
+            <a href="${getWhatsAppSingleUrl(product)}" target="_blank" class="btn-whatsapp" style="flex: 1; justify-content: center;">WhatsApp Order</a>
+          </div>
+
+          <h3 class="font-luxury" style="font-size: 1.2rem; margin-top: 2rem;">Watch Specifications</h3>
+          <table class="specs-table">
+            <tr><td>Movement</td><td>${product.specifications.movement}</td></tr>
+            <tr><td>Case Diameter</td><td>${product.specifications.caseDiameter}</td></tr>
+            <tr><td>Water Resistance</td><td>${product.specifications.waterResistance}</td></tr>
+            <tr><td>Strap Material</td><td>${product.specifications.strapMaterial}</td></tr>
+            <tr><td>Dial Glass</td><td>${product.specifications.glassType}</td></tr>
+            <tr><td>Warranty</td><td>${product.specifications.warranty}</td></tr>
+          </table>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

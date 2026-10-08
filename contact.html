@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - ZK.PK Premium Watches Pakistan</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">ZK<span>.PK</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html">Watches</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="btn-cart">Cart <span class="cart-count">0</span></a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" style="padding: 4rem 1rem; max-width: 800px;">
+    <h1 class="font-luxury" style="font-size: 2.5rem; margin-bottom: 0.5rem;">Contact ZK.PK</h1>
+    <p style="color: var(--text-secondary); margin-bottom: 2rem;">We are here to assist with your order inquiries, model recommendations, and courier tracking.</p>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 3rem;">
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem;">
+        <h4 style="color: var(--emerald); font-size: 0.9rem; text-transform: uppercase;">Direct WhatsApp</h4>
+        <div style="font-size: 1.3rem; font-weight: 800; color: #fff; margin: 8px 0;">+92 311 1089742</div>
+        <p style="color: var(--text-secondary); font-size: 0.8rem;">Direct chat with store representative. Fast response time.</p>
+        <a href="https://wa.me/923111089742" target="_blank" class="btn-whatsapp" style="margin-top: 10px;">Chat on WhatsApp</a>
+      </div>
+
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem;">
+        <h4 style="color: var(--gold); font-size: 0.9rem; text-transform: uppercase;">Email Inquiries</h4>
+        <div style="font-size: 1.1rem; font-weight: 700; color: #fff; margin: 8px 0; word-break: break-all;">yaseenali22235@gmail.com</div>
+        <p style="color: var(--text-secondary); font-size: 0.8rem;">For corporate orders, bulk purchasing or feedback.</p>
+        <a href="mailto:yaseenali22235@gmail.com" class="btn-primary" style="margin-top: 10px; font-size: 0.8rem;">Send Email</a>
+      </div>
+    </div>
+
+    <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 2rem;">
+      <h3 class="font-luxury" style="margin-bottom: 1rem;">Send Us a Message</h3>
+      <form onsubmit="handleContactSubmit(event)">
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.8rem; margin-bottom: 4px; color: var(--text-secondary);">Your Name</label>
+          <input type="text" id="contactName" required style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 10px; border-radius: 8px; color: #fff;">
+        </div>
+        <div style="margin-bottom: 1rem;">
+          <label style="display: block; font-size: 0.8rem; margin-bottom: 4px; color: var(--text-secondary);">Your Phone / WhatsApp</label>
+          <input type="tel" id="contactPhone" required style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 10px; border-radius: 8px; color: #fff;">
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <label style="display: block; font-size: 0.8rem; margin-bottom: 4px; color: var(--text-secondary);">Message</label>
+          <textarea id="contactMessage" rows="4" required style="width: 100%; background: var(--bg-surface); border: 1px solid var(--border); padding: 10px; border-radius: 8px; color: #fff;"></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Submit Inquiry</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-bottom">© 2026 ZK.PK Watches. All rights reserved.</div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value;
+      const phone = document.getElementById('contactPhone').value;
+      const message = document.getElementById('contactMessage').value;
+
+      const url = `https://wa.me/923111089742?text=${encodeURIComponent(`*INQUIRY - ZK.PK*\nName: ${name}\nPhone: ${phone}\nMessage: ${message}`)}`;
+      window.open(url, '_blank');
+      alert('Thank you! Opening WhatsApp to send your inquiry.');
+    }
+  </script>
+</body>
+</html>
